@@ -129,6 +129,9 @@
        <property name="currentText">
         <string>Bozdurmak İstediğiniz Döviz Türünü Seçin</string>
        </property>
+       <property name="maxVisibleItems">
+        <number>15</number>
+       </property>
        <item>
         <property name="text">
          <string>Bozdurmak İstediğiniz Döviz Türünü Seçin</string>
@@ -177,6 +180,9 @@
        </property>
        <property name="currentText">
         <string>Satın Almak İstediğiniz Döviz Türünü Seçiniz</string>
+       </property>
+       <property name="maxVisibleItems">
+        <number>15</number>
        </property>
        <item>
         <property name="text">
