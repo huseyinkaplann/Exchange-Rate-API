@@ -18,6 +18,8 @@ class Window(QtWidgets.QMainWindow):
         self.ui.cbBozdur.addItems(items)
         self.ui.cbAl.addItems(items)
         
+        self.anlikKur()
+        
         self.ui.cbBozdur.currentIndexChanged[str].connect(self.Hesap)
         self.ui.cbAl.currentIndexChanged[str].connect(self.Hesap)
         self.ui.sbBozdur.textChanged.connect(self.Hesap)
@@ -38,7 +40,7 @@ class Window(QtWidgets.QMainWindow):
             miktar = self.ui.sbBozdur.value()
             top_para = miktar * apiJson["conversion_rates"][self.ui.cbAl.currentText()]
             
-            self.ui.lblAl.setText(str(top_para))
+            self.ui.lblAl.setText(f"{top_para:.4f}")
     
     
     def Onay(self):
@@ -53,10 +55,27 @@ class Window(QtWidgets.QMainWindow):
         
         msg.setDetailedText(f"{self.ui.sbBozdur.value()} {self.ui.cbBozdur.currentText()} karşılığında {self.ui.lblAl.text()} {self.ui.cbAl.currentText()} hesabınıza eklenecektir.")
         
-        x = msg.exec_()
+        msg.exec_()
+    
+    
+    def anlikKur(self):
+        kurlar = ["USD", "EUR", "GBP", "AUD", "CAD", "CHF", "DKK"]
         
-        print(x)
-            
+        apiUrl = "https://v6.exchangerate-api.com/v6/" + self.apiKey + "/latest/" + "TRY"
+        apiJson = requests.get(apiUrl)
+        apiJson = json.loads(apiJson.text)
+        
+        items = self.ui.groupKurlar.findChildren(QtWidgets.QLabel)
+        
+        kurIndex = 0
+        
+        for index, item in enumerate(items):
+            if index % 2 == 0:
+                item.setText(f"1 {kurlar[kurIndex]}")
+            else:
+                item.setText(f"{(1 / (apiJson['conversion_rates'][kurlar[kurIndex]])):.4f} TRY")
+                kurIndex += 1
+                         
         
 def app(apiKey):
     apiKey = apiKey
