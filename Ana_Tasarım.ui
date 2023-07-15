@@ -83,7 +83,7 @@
      <item>
       <widget class="QPushButton" name="btnParaEkle">
        <property name="text">
-        <string>Para Yatır</string>
+        <string>Para Ekleme</string>
        </property>
       </widget>
      </item>
@@ -233,7 +233,7 @@
     <property name="title">
      <string>Mevcut Kurlar</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
