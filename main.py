@@ -34,9 +34,7 @@ class Window(QtWidgets.QMainWindow):
     
     def Hesap(self, text):
         if (self.ui.cbBozdur.currentText() == "Bozdurmak İstediğiniz Döviz Türünü Seçin" or self.ui.cbAl.currentText() == "Satın Almak İstediğiniz Döviz Türünü Seçiniz"):
-            self.ui.lblAl.setText("0")
-        #elif self.ui.sbBozdur.text() == "":
-        #    self.ui.lblAl.setText("0")    
+            self.ui.lblAl.setText("0")   
         else:
             apiUrl = "https://v6.exchangerate-api.com/v6/" + self.apiKey + "/latest/" + self.ui.cbBozdur.currentText()
             apiJson = requests.get(apiUrl)
@@ -60,8 +58,28 @@ class Window(QtWidgets.QMainWindow):
         
         msg.setDetailedText(f"{self.ui.sbBozdur.value()} {self.ui.cbBozdur.currentText()} karşılığında {self.ui.lblAl.text()} {self.ui.cbAl.currentText()} hesabınıza eklenecektir.")
         
-        msg.exec_()
-    
+        x = msg.exec_()
+        
+        if x == 1024:
+            if self.ui.cbBozdur.currentText() in self.mvctPara.keys() and self.ui.sbBozdur.value() <= self.mvctPara[self.ui.cbBozdur.currentText()]:
+                self.mvctPara[self.ui.cbBozdur.currentText()] -= self.ui.sbBozdur.value()
+                
+                miktar = float(self.ui.lblAl.text())
+                
+                if self.ui.cbAl.currentText() in self.mvctPara.keys():
+                    self.mvctPara[self.ui.cbAl.currentText()] += miktar
+                else:
+                    self.mvctPara[self.ui.cbAl.currentText()] = miktar
+                
+                self.mevcutParaGüncel()
+            else:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Error")
+                msg.setInformativeText("More Information")
+                msg.setWindowTitle("Error")
+                msg.exec_()
+                        
     
     def anlikKur(self):
         kurlar = ["USD", "EUR", "GBP", "AUD", "CAD", "CHF", "DKK"]
@@ -83,6 +101,7 @@ class Window(QtWidgets.QMainWindow):
                 
     
     def ParaEkleme(self):
+        x = 0
         miktar, ok = QInputDialog.getInt(self, "Para Ekleme", "Eklemek istediğiniz tutarı giriniz:\n(tek seferde en fazla 100.000 birim eklenebilir)", 0, 0, 100000, 1)
         
         if ok and miktar is not None:
