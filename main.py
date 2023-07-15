@@ -11,15 +11,14 @@ class Window(QtWidgets.QMainWindow):
         
         self.apiKey = apiKey
         self.mvctPara = {}
-        
-        
+            
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
     
-        items = ['TRY', 'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CDF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'FJD', 'FKP', 'FOK', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'KES', 'KGS', 'KHR', 'KID', 'KMF', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRU', 'MUR', 'MVR', 'MWK', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NPR', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SGD', 'SHP', 'SLE', 'SLL', 'SOS', 'SRD', 'SSP', 'STN', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TTD', 'TVD', 'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VES', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW', 'ZWL']
+        self.items = ['TRY', 'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CDF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'FJD', 'FKP', 'FOK', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'KES', 'KGS', 'KHR', 'KID', 'KMF', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRU', 'MUR', 'MVR', 'MWK', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NPR', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SGD', 'SHP', 'SLE', 'SLL', 'SOS', 'SRD', 'SSP', 'STN', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TTD', 'TVD', 'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VES', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW', 'ZWL']
         
-        self.ui.cbBozdur.addItems(items)
-        self.ui.cbAl.addItems(items)
+        self.ui.cbBozdur.addItems(self.items)
+        self.ui.cbAl.addItems(self.items)
         
         self.anlikKur()
         
@@ -47,38 +46,39 @@ class Window(QtWidgets.QMainWindow):
     
     
     def Onay(self):
-        msg = QMessageBox()
-        
-        msg.setWindowTitle("İşlem Onayı")
-        msg.setText("İşleminizi Onaylıyor musunuz?")
-        
-        msg.setIcon(QMessageBox.Question)
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-        msg.setDefaultButton(QMessageBox.Ok)
-        
-        msg.setDetailedText(f"{self.ui.sbBozdur.value()} {self.ui.cbBozdur.currentText()} karşılığında {self.ui.lblAl.text()} {self.ui.cbAl.currentText()} hesabınıza eklenecektir.")
-        
-        x = msg.exec_()
-        
-        if x == 1024:
-            if self.ui.cbBozdur.currentText() in self.mvctPara.keys() and self.ui.sbBozdur.value() <= self.mvctPara[self.ui.cbBozdur.currentText()]:
-                self.mvctPara[self.ui.cbBozdur.currentText()] -= self.ui.sbBozdur.value()
-                
-                miktar = float(self.ui.lblAl.text())
-                
-                if self.ui.cbAl.currentText() in self.mvctPara.keys():
-                    self.mvctPara[self.ui.cbAl.currentText()] += miktar
+        if ((self.ui.cbBozdur.currentText() != "Bozdurmak İstediğiniz Döviz Türünü Seçin") and (self.ui.cbAl.currentText() != "Satın Almak İstediğiniz Döviz Türünü Seçiniz") and (self.ui.sbBozdur.value() != 0)):
+            msg = QMessageBox()
+            
+            msg.setWindowTitle("İşlem Onayı")
+            msg.setText("İşleminizi Onaylıyor musunuz?")
+            
+            msg.setIcon(QMessageBox.Question)
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            msg.setDefaultButton(QMessageBox.Ok)
+            
+            msg.setDetailedText(f"{self.ui.sbBozdur.value()} {self.ui.cbBozdur.currentText()} karşılığında {self.ui.lblAl.text()} {self.ui.cbAl.currentText()} hesabınıza eklenecektir.")
+            
+            x = msg.exec_()
+            
+            if x == 1024:
+                if self.ui.cbBozdur.currentText() in self.mvctPara.keys() and self.ui.sbBozdur.value() <= self.mvctPara[self.ui.cbBozdur.currentText()]:
+                    self.mvctPara[self.ui.cbBozdur.currentText()] -= self.ui.sbBozdur.value()
+                    
+                    miktar = float(self.ui.lblAl.text())
+                    
+                    if self.ui.cbAl.currentText() in self.mvctPara.keys():
+                        self.mvctPara[self.ui.cbAl.currentText()] += miktar
+                    else:
+                        self.mvctPara[self.ui.cbAl.currentText()] = miktar
+                    
+                    self.mevcutParaGüncel()
                 else:
-                    self.mvctPara[self.ui.cbAl.currentText()] = miktar
-                
-                self.mevcutParaGüncel()
-            else:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("Error")
-                msg.setInformativeText("More Information")
-                msg.setWindowTitle("Error")
-                msg.exec_()
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Critical)
+                    msg.setText("Hata")
+                    msg.setInformativeText("İşlemi gerçekleştimek için mevcut paranız yetersizdir")
+                    msg.setWindowTitle("Yetersiz Bakiye")
+                    msg.exec_()
                         
     
     def anlikKur(self):
@@ -102,11 +102,21 @@ class Window(QtWidgets.QMainWindow):
     
     def ParaEkleme(self):
         x = 0
+        
         miktar, ok = QInputDialog.getInt(self, "Para Ekleme", "Eklemek istediğiniz tutarı giriniz:\n(tek seferde en fazla 100.000 birim eklenebilir)", 0, 0, 100000, 1)
         
         if ok and miktar is not None:
-            cins, ok = QInputDialog.getItem(self, "Para Ekleme", "Eklemek istediğiniz döviz cinsini seçiniz: ", ['TRY', 'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'SEK', 'KRW', 'NOK', 'NZD', 'INR', 'MXN', 'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CDF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'FJD', 'FKP', 'FOK', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'KES', 'KGS', 'KHR', 'KID', 'KMF', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRU', 'MUR', 'MVR', 'MWK', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NPR', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SGD', 'SHP', 'SLE', 'SLL', 'SOS', 'SRD', 'SSP', 'STN', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TTD', 'TVD', 'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VES', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW', 'ZWL'])
-                   
+            cins, ok = QInputDialog.getItem(self, "Para Ekleme", "Eklemek istediğiniz döviz cinsini seçiniz: ", self.items)
+          
+        if cins not in self.items:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Hata")
+            msg.setInformativeText("Geçerli bir döviz türü seçmediniz")
+            msg.setWindowTitle("Hatalı tür")
+            msg.exec_()
+            return
+                 
         if ok and cins is not None:
             msg = QMessageBox()
         
@@ -131,6 +141,14 @@ class Window(QtWidgets.QMainWindow):
     
     
     def mevcutParaGüncel(self):
+        removeKey = []
+        for key in self.mvctPara.keys():
+            if self.mvctPara[key] == 0:
+                removeKey.append(key)
+        
+        for key in removeKey:
+            self.mvctPara.pop(key)
+        
         self.ui.listTopPara.clear()
         
         for cins, miktar in self.mvctPara.items():

@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_1.setSpacing(15)
         self.horizontalLayout_1.setObjectName("horizontalLayout_1")
         self.sbBozdur = QtWidgets.QSpinBox(self.horizontalLayoutWidget)
-        self.sbBozdur.setMaximum(10000)
+        self.sbBozdur.setMaximum(100000)
         self.sbBozdur.setObjectName("sbBozdur")
         self.horizontalLayout_1.addWidget(self.sbBozdur)
         self.cbBozdur = QtWidgets.QComboBox(self.horizontalLayoutWidget)
