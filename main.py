@@ -152,7 +152,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui.listTopPara.clear()
         
         for cins, miktar in self.mvctPara.items():
-            self.ui.listTopPara.addItem(f"{cins}: {miktar}")
+            self.ui.listTopPara.addItem(f"{cins}: {miktar:.4f}")
         
         
 def app(apiKey):
