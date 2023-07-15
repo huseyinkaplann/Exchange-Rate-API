@@ -10,6 +10,9 @@ class Window(QtWidgets.QMainWindow):
         super(Window, self).__init__()
         
         self.apiKey = apiKey
+        self.mvctPara = {}
+        
+        
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
     
@@ -97,8 +100,23 @@ class Window(QtWidgets.QMainWindow):
             
             msg.setDetailedText(f"Hesabınıza {miktar} {cins} eklenecektir.")
             
-            msg.exec_()
-   
+            x = msg.exec_()
+        
+        if x == 1024:
+            if cins in self.mvctPara.keys():
+                self.mvctPara[cins] += miktar
+            else:
+                self.mvctPara[cins] = miktar
+                
+            self.mevcutParaGüncel()
+    
+    
+    def mevcutParaGüncel(self):
+        self.ui.listTopPara.clear()
+        
+        for cins, miktar in self.mvctPara.items():
+            self.ui.listTopPara.addItem(f"{cins}: {miktar}")
+        
         
 def app(apiKey):
     app = QtWidgets.QApplication(sys.argv)
